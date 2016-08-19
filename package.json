@@ -1,0 +1,50 @@
+{
+  "name": "typescript-03",
+  "version": "0.0.0",
+  "description": "typescript-03",
+  "license": "MIT",
+  "repository": "",
+  "author": "",
+  "keywords": [
+    ""
+  ],
+  "files": [
+    "lib"
+  ],
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "scripts": {
+    "clean": "rimraf dist",
+    "lint": "tslint --format verbose 'src/**/*.ts'",
+    "build": "npm run clean && npm run lint && echo Using TypeScript && tsc --version && tsc --pretty",
+    "test": "npm run build && mocha --compilers ts:ts-node/register --recursive test/**/*-spec.ts",
+    "watch": "npm run build -- --watch",
+    "watch:test": "npm run test -- --watch"
+  },
+  "dependencies": {
+    "@reactivex/rxjs": "^5.0.0-beta.11",
+    "bluebird": "^3.4.1",
+    "consolidate": "^0.14.1",
+    "express": "^4.14.0",
+    "handlebars": "^4.0.5",
+    "vio": "^0.2.1"
+  },
+  "devDependencies": {
+    "@types/chai": "3.4.30",
+    "@types/mocha": "2.2.29",
+    "@types/node": "6.0.31",
+    "chai": "^3.5.0",
+    "rimraf": "^2.5.4",
+    "ts-node": "^1.2.2",
+    "tslint": "3.14.0-dev.1",
+    "gulp": "^3.9.1",
+    "gulp-mocha": "^3.0.1",
+    "gulp-typescript": "^2.13.6",
+    "mocha": "^3.0.2",
+    "tsd": "^0.6.5",
+    "typescript": "2.0.0"
+  },
+  "engines": {
+    "node": ">=4.0.0"
+  }
+}

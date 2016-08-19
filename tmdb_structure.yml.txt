@@ -1,0 +1,78 @@
+Video
+	backdropPath
+	belongsToCollection
+	budget
+	genre
+	  -
+	    name
+	homepage
+	tmdb_id
+	imdb_id
+	originalLanguage
+	originalTitle
+	overview
+	popularity
+	posterPath
+	productionCompay
+		- 
+		  name
+	productionCountry
+		- 
+		  iso3166_1
+		  name
+	release_date
+	revenue
+	runtime
+	spokenLanguages
+	  - 
+	    languageCode(iso639_1)
+		name
+	status
+	tagline
+	title
+	video
+	averageVote
+	voteCount
+	releases
+	  - countries
+	    -
+		  certification
+		  countryCode (iso3166_1)
+		  primary
+		  release_date
+	images
+	  - backdrops
+	    - aspectRatio
+		- filePath
+		- height
+		- languageCode
+		- averageVote
+		- width
+	  - posters
+	keywords
+	  - keywords
+	     - 
+		   name
+	alternative_titles
+	  - titles
+	    - languageCode
+		- title
+	credits
+	  - cast
+	    - 
+		  cast_id
+		  character
+		  credit_id
+		  id
+		  name
+		  order
+		  profile_path
+		
+	  - crew
+		- 
+		  credit_id
+		  department
+		  job
+		  id
+		  name
+		  profile_path
