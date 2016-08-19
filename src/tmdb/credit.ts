@@ -1,7 +1,7 @@
 import {Crew} from "./crew";
 import {Cast} from "./cast";
 
-export interface Credit {
+export class Credit {
     cast: Array<Cast>;
     crew: Array<Crew>;
 }

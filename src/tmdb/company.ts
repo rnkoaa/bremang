@@ -1,4 +1,4 @@
-export interface Company{
-    tmdbId: number;
+export class Company{
+    id: number;
     name: string;
 }

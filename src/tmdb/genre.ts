@@ -1,4 +1,4 @@
 export class Genre{
-    tmdbId: number;
+    id: number;
     name: string;
 }

@@ -1,8 +1,8 @@
-export interface Crew {
-    tmdbId: number;
-    tmdbCreditId: number;
+export class Crew {
+    id: number;
+    credit_id: number;
     department: string;
     name: string;
     job: number;
-    profilePath: string;
+    profile_path: string;
 }

@@ -1,9 +1,9 @@
-export interface Cast {
-    tmdbId: number;
-    tmdbCastId: number;
-    tmdbCreditId: number;
+export class Cast {
+    id: number;
+    cast_id: number;
+    credit_id: number;
     character: string;
     name: string;
     order: number;
-    profilePath: string;
+    profile_path: string;
 }

@@ -1,5 +1,11 @@
 import {Country} from "./country";
 
-export class Release{
-    countries: Array<Country>;
+export class Release extends Country{
+    primary: boolean;
+    release_date: string;
+    certification: string;
+}
+
+export class Releases{
+    countries: Array<Release>;
 }

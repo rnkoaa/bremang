@@ -1,4 +1,8 @@
 export class Keyword{
-    tmdbId: number;
+    id: number;
     name: string;
+}
+
+export class keywords{
+    keywords: Array<Keyword>;
 }

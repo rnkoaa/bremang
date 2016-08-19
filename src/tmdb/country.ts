@@ -1,5 +1,6 @@
-export interface Country{
-    tmdbId: number;
+export class Country{
+    id: number;
     name: string;
-    isoCode: string;
+    iso_3166_1: string;
+    //isoCode: string;
 }

@@ -1,5 +1,6 @@
-export interface Language{
-    tmdbId: number;
+export class Language{
+    id: number;
     name: string;
-    isoCode: string;
+    iso_639_1: string;
+    //isoCode: string;
 }
