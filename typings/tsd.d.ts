@@ -9,3 +9,4 @@
 /// <reference path="es6-shim/es6-shim.d.ts" />
 /// <reference path="bluebird/bluebird-2.0.d.ts" />
 /// <reference path="consolidate/consolidate.d.ts" />
+/// <reference path="lodash/lodash.d.ts" />

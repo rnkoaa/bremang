@@ -23,5 +23,9 @@ gulp.task('test', function () {
     }));
 });
 
+gulp.task('watch-test', ['build', 'test'], function () {
+    gulp.watch('./test/**/*.ts', ['build', 'test']);
+});
+
 
 gulp.task('default', ['build', 'test']);

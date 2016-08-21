@@ -40,6 +40,9 @@
     },
     "bluebird/bluebird.d.ts": {
       "commit": "57ec5fbb76060329c10959d449eb1d4e70b15a65"
+    },
+    "lodash/lodash.d.ts": {
+      "commit": "80a8a6de5054d0907187e5fa3caf1f61f93b7092"
     }
   }
 }

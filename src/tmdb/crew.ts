@@ -1,8 +1,8 @@
 export class Crew {
     id: number;
-    credit_id: number;
+    credit_id: string;
     department: string;
     name: string;
-    job: number;
+    job: string;
     profile_path: string;
 }

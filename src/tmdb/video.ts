@@ -10,7 +10,7 @@ import {Credit} from "./credit";
 
 export class Video {
     id: number;
-    imdb_id: number;
+    imdb_id: string;
     backdrop_path: string;
     budget: number;
     genres: Array<Genre>;

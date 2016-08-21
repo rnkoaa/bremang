@@ -27,6 +27,7 @@
     "consolidate": "^0.14.1",
     "express": "^4.14.0",
     "handlebars": "^4.0.5",
+    "lodash": "^4.15.0",
     "vio": "^0.2.1"
   },
   "devDependencies": {
