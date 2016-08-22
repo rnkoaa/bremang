@@ -8,4 +8,8 @@ export class PersonCast{
     release_date: string;
     title: string;
     media_type: string;
+    first_air_date: string;
+    episode_count: number;
+    original_name: string;
+    name: string;
 }
