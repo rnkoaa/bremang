@@ -1,0 +1,49 @@
+Person
+Movie
+
+Person
+	movieRoles
+		cast
+			character
+			movie
+		crew
+			job
+			movie
+Movie
+	roles
+		cast
+			character
+			person
+		crew
+			job
+			person
+
+
+Person
+	credits:
+		cast: Array<PersonCast>
+		crew: Array<PersonCrew>
+
+Movie:
+	credits:
+		cast: Array<MovieCast>
+		crew: Array<MovieCrew>
+
+Cast:
+	character
+	order
+Crew:
+	job
+	department
+
+MovieCast : Cast
+	movie
+
+MovieCrew : Crew
+	movie
+
+PersonCast : Cast
+	person
+
+PersonCrew : Crew
+	person
