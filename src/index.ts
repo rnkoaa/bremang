@@ -1,3 +1,4 @@
-import { Greeter } from "./greeter";
+import { movieTest } from "./brem/casting/cast";
 
-export { Greeter };
+
+movieTest();
