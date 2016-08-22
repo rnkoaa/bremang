@@ -6,7 +6,7 @@ import {Language} from "./language";
 import {keywords} from "./keyword";
 import {Images} from "./image";
 import {Releases} from "./release";
-import {Credit} from "./credit";
+import {Credit} from "./movie.credit";
 
 export class Video {
     id: number;

@@ -17,8 +17,8 @@ import {Image} from "../tmdb/image";
 import {BremKeyword} from "../brem/keyword.brem";
 import {Keyword, keywords} from "../tmdb/keyword";
 import {BremCast} from "../brem/cast.brem";
-import {Cast} from "../tmdb/cast";
-import {Crew} from "../tmdb/crew";
+import {Cast} from "../tmdb/movie.cast";
+import {Crew} from "../tmdb/movie.crew";
 import {BremCrew} from "../brem/crew.brem";
 
 const transform = _.transform;

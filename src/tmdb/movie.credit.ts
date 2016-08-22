@@ -1,5 +1,5 @@
-import {Crew} from "./crew";
-import {Cast} from "./cast";
+import {Crew} from "./movie.crew";
+import {Cast} from "./movie.cast";
 
 export class Credit {
     cast: Array<Cast>;
