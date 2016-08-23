@@ -10,7 +10,8 @@ const BUILD_DIRECTORY = './dist';
 gulp.task("build", function () {
     return tsProject.src()
         .pipe(ts(tsProject))
-        .js.pipe(gulp.dest("dist"));
+        .js
+        .pipe(gulp.dest("dist"));
 });
 
 gulp.task('test', function () {
@@ -44,13 +45,13 @@ gulp.task('clean-node-modules', function () {
 });
 
 /*gulp.task('clean-build', function(cb) {
-    runSequence('build-clean',
-        ['build-scripts', 'build-styles'],
-        'build-html',
-        callback);
-});*/
+ runSequence('build-clean',
+ ['build-scripts', 'build-styles'],
+ 'build-html',
+ callback);
+ });*/
 
-gulp.task('clean-build', function() {
+gulp.task('clean-build', function () {
     runSequence('clean-dist',
         ['build'],
         function () {

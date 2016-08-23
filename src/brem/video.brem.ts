@@ -6,8 +6,8 @@ import {BremCompany} from "./company.brem";
 import {BremRelease} from "./release.brem";
 import {BremImage} from "./image.brem";
 import {BremKeyword} from "./keyword.brem";
-import {BremCast} from "./cast.brem";
-import {BremCrew} from "./crew.brem";
+import {BremPerson} from "./person.brem";
+import {BremCredit} from "./credit.brem";
 
 export class BremVideo {
     id: string;
@@ -37,15 +37,12 @@ export class BremVideo {
     releases: Array<BremRelease>;
     images: Array<BremImage>;
     keywords: Array<BremKeyword>;
-    cast: Array<BremCast>;
-    crew: Array<BremCrew>;
+    credits: BremCredit<BremPerson>;
 
     constructor(){
         this.releases = [];
         this.images = [];
         this.keywords = [];
-        this.cast = [];
-        this.crew = [];
         this.productionCompanies = [];
         this.productionCountries = [];
         this.genres = [];
