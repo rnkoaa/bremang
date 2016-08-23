@@ -10,7 +10,7 @@ export class Credit<T> {
     cast: Array<Cast<T>>;
     crew: Array<Crew<T>>;
 
-    constructor(){
+    constructor() {
         this.cast = [];
         this.crew = [];
     }
@@ -45,20 +45,19 @@ export class Person {
 export class Movie {
     id: string;
     title: string;
+    adult: boolean;
     credits: Credit<Person>;
     imdbId: string;
     releaseDate: string;
     originalTitle: string;
     posterPath: string;
-    tmdbId : number;
+    tmdbId: number;
 }
 
 export function movieTest() {
     console.log('movie tester');
-    let movie = new Movie();
-    let person = new Person();
 
-    movie.id = 'adbc';
+    let person = new Person();
 
     let movieCredits = new Credit<Movie>();
 
@@ -101,11 +100,11 @@ export function movieTest() {
     person.id = 'adbced';
     person.tmdbId = 449;
     person.imdbId = "nm0059431";
-    person.placeOfBirth =  "Ottawa, Ontario, Canada";
-    person.name ="Jay Baruchel";
+    person.placeOfBirth = "Ottawa, Ontario, Canada";
+    person.name = "Jay Baruchel";
     person.birthday = "1982-04-09";
     person.adult = false;
-    person.popularity =  6.041311;
+    person.popularity = 6.041311;
     person.homepage = "";
     person.deathday = "";
     person.profilePath = "/9SFoTtDoB0oozIWH7L8BtuWKR37.jpg";
@@ -114,16 +113,51 @@ export function movieTest() {
     //let credits = new Credit<Person>();
 
     /*let person = new Person();
-    person.name = 'Richard Agyei';
-    credits.cast.push(new Cast<Person>());
-    credits.crew.push(new Crew<Person>());
+     person.name = 'Richard Agyei';
+     credits.cast.push(new Cast<Person>());
+     credits.crew.push(new Crew<Person>());
 
-    movie.credits = credits;*/
+     movie.credits = credits;*/
 
-   // person.credits = credits;
+    // person.credits = credits;
 
-   // console.log(JSON.stringify(movie));
-    console.log(JSON.stringify(person));
+    // console.log(JSON.stringify(movie));
+    //console.log(JSON.stringify(person));
 
     console.log("=============================================================")
+    let movie = new Movie();
+    movie.id = 'adbc';
+    let personCredits = new Credit<Person>();
+    let personCast = new Cast<Person>();
+    personCast.mediaType = 'movie';
+    personCast.character = "The Narrator";
+    personCast.order = 0;
+    personCast.tmdbCreditId = "52fe4250c3a36847f80149f3";
+
+    let moviePerson = new Person();
+    //moviePerson.credits.cast.push(personCast);
+    moviePerson.adult = false;
+    moviePerson.name = "Edward Norton";
+    moviePerson.tmdbId = 819;
+
+    moviePerson.profilePath = "/iUiePUAQKN4GY6jorH9m23cbVli.jpg";
+
+    personCast.item = moviePerson;
+    personCredits.cast.push(personCast);
+
+    let personCrew = new Crew<Person>();
+    personCrew.department = "Production";
+    personCrew.job = "Producer";
+    personCrew.tmdbCreditId = "52fe4250c3a36847f8014a0b";
+
+    let crewPerson = new Person();
+    crewPerson.tmdbId = 7475;
+    crewPerson.name = "Ceán Chaffin";
+    crewPerson.profilePath = null;
+
+    personCrew.item = crewPerson;
+
+    personCredits.crew.push(personCrew);
+    movie.credits = personCredits;
+    console.log(JSON.stringify(movie));
 }
