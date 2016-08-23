@@ -24,7 +24,7 @@ describe("when using rxjava to read file.", () => {
                 //let dataAsString = data.toString('utf8');
                 //console.log(dataAsString);
                 console.log('received');
-                console.log(data);
+               // console.log(data);
             }, (err) => {
                 console.log(err);
             }, () => {
