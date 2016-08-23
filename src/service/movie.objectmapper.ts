@@ -20,6 +20,9 @@ import {BremCast} from "../brem/cast.brem";
 import {Cast} from "../tmdb/movie.cast";
 import {Crew} from "../tmdb/movie.crew";
 import {BremCrew} from "../brem/crew.brem";
+import {Credit} from "../tmdb/movie.credit";
+import {BremCredit} from "../brem/credit.brem";
+import {BremPerson} from "../brem/person.brem";
 
 const transform = _.transform;
 
@@ -62,8 +65,7 @@ export class ObjectMapper {
         mappedVideo.releases = this.mapReleases(video.releases);
         mappedVideo.keywords = this.mapKeywords(video.keywords);
 
-        mappedVideo.cast = this.mapCast(video.credits.cast);
-        mappedVideo.crew = this.mapCrew(video.credits.crew);
+      mappedVideo.credits = this.mapCredits(video.credits);
 
         //map all the images into a single array
         let images: Array<BremImage> = this.mapImages(video.images.backdrops, 'isBackDrop');
@@ -72,34 +74,53 @@ export class ObjectMapper {
         return mappedVideo;
     }
 
-    static mapCast(cast: Array<Cast>): Array<BremCast> {
-        return transform(cast, (results : Array<BremCast>, castItem: Cast) => {
-            let bremCast = new BremCast();
-            bremCast.tmdbId = castItem.id;
-            bremCast.tmdbCastId = castItem.cast_id;
+
+    static mapCredits(credits: Credit) : BremCredit<BremPerson>{
+        let bremCredit = new BremCredit<BremPerson>();
+        bremCredit.cast = this.mapCast(credits.cast);
+        bremCredit.crew = this.mapCrew(credits.crew);
+        return bremCredit;
+    }
+
+    static mapCast(cast: Array<Cast>): Array<BremCast<BremPerson>> {
+        return transform(cast, (results : Array<BremCast<BremPerson>>, castItem: Cast) => {
+            let bremCast = new BremCast<BremPerson>();
+            bremCast.mediaType = "movie";
             bremCast.character = castItem.character;
-            bremCast.name = castItem.name;
             bremCast.order = castItem.order;
-            bremCast.profilePath = castItem.profile_path;
             bremCast.tmdbCreditId = castItem.credit_id;
+
+            let bremPerson = new BremPerson();
+            bremPerson.name = castItem.name;
+            bremPerson.profilePath = castItem.profile_path;
+            bremPerson.tmdbId = castItem.id;
+
+            bremCast.item = bremPerson;
             results.push(bremCast);
 
             return bremCast;
         }, []);
     }
 
-    static mapCrew(crew: Array<Crew>): Array<BremCrew> {
-        return transform(crew, (results : Array<BremCrew>, crewItem: Crew) => {
-            let bremCrew = new BremCrew();
-            bremCrew.tmdbId = crewItem.id;
-            bremCrew.tmdbCreditId = crewItem.credit_id;
-            bremCrew.name = crewItem.name;
-            bremCrew.job = crewItem.job;
-            bremCrew.profilePath = crewItem.profile_path;
+    static mapCrew(crew: Array<Crew>): Array<BremCrew<BremPerson>> {
+        return transform(crew, (results : Array<BremCrew<BremPerson>>, crewItem: Crew) => {
+
+            let bremCrew = new BremCrew<BremPerson>();
+            bremCrew.mediaType = "movie";
             bremCrew.department = crewItem.department;
+            bremCrew.job = crewItem.job;
+            bremCrew.tmdbCreditId = crewItem.credit_id;
+
+            let bremPerson = new BremPerson();
+            bremPerson.name = crewItem.name;
+            bremPerson.profilePath = crewItem.profile_path;
+            bremPerson.tmdbId = crewItem.id;
+
+            bremCrew.item = bremPerson;
             results.push(bremCrew);
 
-            return crewItem;
+            return bremCrew;
+
         }, []);
     }
     static mapKeywords(keywords: keywords): Array<BremKeyword> {

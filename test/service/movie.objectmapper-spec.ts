@@ -9,6 +9,7 @@ import * as _ from "lodash";
 import {BremVideo} from "../../src/brem/video.brem";
 import {BremCast} from "../../src/brem/cast.brem";
 import {BremCrew} from "../../src/brem/crew.brem";
+import {BremPerson} from "../../src/brem/person.brem";
 
 const expect = chai.expect;
 
@@ -124,31 +125,30 @@ describe("test data transformations", () => {
 
     it("verify that the video transformation also transforms the cast", (done) => {
 
-        let bremCast = bremVideo.cast;
+        let bremCast : Array<BremCast<BremPerson>> = bremVideo.credits.cast;
 
         //ensure that the mapped objects correctly
         expect(bremCast.length).to.eq(video.credits.cast.length);
 
-        let oneBremCast = _.find(bremCast, (bremCastItem: BremCast) => bremCastItem.tmdbId == 59285);
+        let oneBremCast = _.find(bremCast, (bremCastItem: BremCast<BremPerson>) => bremCastItem.item.tmdbId == 59285);
         expect(oneBremCast).to.not.be.null;
-        expect(oneBremCast.name).to.be.eq("Ezra Buzzington");
+        expect(oneBremCast.item.name).to.be.eq("Ezra Buzzington");
         expect(oneBremCast.tmdbCreditId).to.be.eq("52fe4250c3a36847f8014a71");
         expect(oneBremCast.order).to.be.eq(12);
         expect(oneBremCast.character).to.be.eq("Inspector Dent");
-        expect(oneBremCast.tmdbCastId).to.be.eq(38);
         done();
     });
 
     it("verify that the video transformation also transforms the crew", (done) => {
 
-        let bremCrew = bremVideo.crew;
+        let bremCrew : Array<BremCrew<BremPerson>> = bremVideo.credits.crew;
 
         //ensure that the mapped objects correctly
         expect(bremCrew.length).to.eq(video.credits.crew.length);
 
-        let oneBremCrew = _.find(bremCrew, (bremCrewItem: BremCrew) => bremCrewItem.tmdbId == 7764);
+        let oneBremCrew = _.find(bremCrew, (bremCrewItem: BremCrew<BremPerson>) => bremCrewItem.item.tmdbId == 7764);
         expect(oneBremCrew).to.not.be.null;
-        expect(oneBremCrew.name).to.be.eq("Richard Hymns");
+        expect(oneBremCrew.item.name).to.be.eq("Richard Hymns");
         expect(oneBremCrew.tmdbCreditId).to.be.eq("52fe4250c3a36847f8014a41");
         expect(oneBremCrew.job).to.be.eq("Sound Editor");
         expect(oneBremCrew.department).to.be.eq("Sound");
