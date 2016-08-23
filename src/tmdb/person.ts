@@ -11,6 +11,7 @@ export class Person{
     name: string;
     place_of_birth: string;
     popularity: number;
+    media_type: string;
     profile_path: string;
     combined_credits: CombinedCredits;
 }

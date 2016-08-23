@@ -153,7 +153,6 @@ describe("test data transformations", () => {
         expect(oneBremCrew.job).to.be.eq("Sound Editor");
         expect(oneBremCrew.department).to.be.eq("Sound");
 
-        console.log(JSON.stringify(bremVideo));
         done();
     });
 });

@@ -21,10 +21,6 @@ describe("when using rxjava to read file.", () => {
                 expect(data).to.not.be.null;
                 expect(data).to.not.be.empty;
 
-                //let dataAsString = data.toString('utf8');
-                //console.log(dataAsString);
-                console.log('received');
-               // console.log(data);
             }, (err) => {
                 console.log(err);
             }, () => {
