@@ -8,6 +8,9 @@ import {Person} from "../../src/tmdb/person";
 import {PersonCast} from "../../src/tmdb/person.cast";
 import {PersonObjectMapper} from "../../src/service/person.objectmapper";
 import {BremPerson} from "../../src/brem/person.brem";
+import {BremCast} from "../../src/brem/cast.brem";
+import {BremVideo} from "../../src/brem/video.brem";
+import {BremCrew} from "../../src/brem/crew.brem";
 
 const expect = chai.expect;
 const readFileObservable = Observable.bindNodeCallback<string>(readFile);
@@ -20,12 +23,17 @@ describe("Map of Person to Brem Person", () => {
     let person = new Person();
 
     let personObservable: Observable<Person> = null;
+    let bremPersonObservable: Observable<BremPerson> = null;
     before(() => {
         personObservable = readFileObservable('./testdata/449.person.json')
             .map(stringAsUtf8)
             .map((data: string) => {
                 return <Person>JSON.parse(data);
             });
+
+        bremPersonObservable = personObservable.map((person: Person) => {
+            return PersonObjectMapper.map(person);
+        });
     });
 
     it("subscribe to person observable", (done) => {
@@ -37,7 +45,7 @@ describe("Map of Person to Brem Person", () => {
                 done();
             },
             (err) => {
-
+                throw err;
             }, ()=> {
                 // done();
             });
@@ -84,10 +92,7 @@ describe("Map of Person to Brem Person", () => {
     });
 
     it("map the person to a bremPerson and verify that the mapping completed successfully", (done)=> {
-        personObservable
-            .map((person: Person) => {
-                return PersonObjectMapper.map(person);
-            })
+        bremPersonObservable
             .subscribe((bremPerson: BremPerson) => {
 
                 expect(bremPerson).to.not.be.undefined;
@@ -113,7 +118,6 @@ describe("Map of Person to Brem Person", () => {
                 expect(bremPerson.alsoKnownAs.length).to.be.eq(1);
 
 
-
                 done();
             }, (err) => {
 
@@ -123,10 +127,7 @@ describe("Map of Person to Brem Person", () => {
     });
 
     it("map the person to a bremPerson field for TMDBID", (done)=> {
-        personObservable
-            .map((person: Person) => {
-                return PersonObjectMapper.map(person);
-            })
+        bremPersonObservable
             .subscribe((bremPerson: BremPerson) => {
 
                 expect(bremPerson).to.not.be.undefined;
@@ -145,10 +146,7 @@ describe("Map of Person to Brem Person", () => {
     });
 
     it("map the person to a bremPerson field for NAME OF PERSON", (done)=> {
-        personObservable
-            .map((person: Person) => {
-                return PersonObjectMapper.map(person);
-            })
+        bremPersonObservable
             .subscribe((bremPerson: BremPerson) => {
                 expect(bremPerson).to.not.be.undefined;
                 expect(bremPerson).to.not.be.null;
@@ -166,10 +164,7 @@ describe("Map of Person to Brem Person", () => {
     });
 
     it("map the person to a bremPerson field for PLACE_OF_BIRTH", (done)=> {
-        personObservable
-            .map((person: Person) => {
-                return PersonObjectMapper.map(person);
-            })
+        bremPersonObservable
             .subscribe((bremPerson: BremPerson) => {
                 expect(bremPerson).to.not.be.undefined;
                 expect(bremPerson).to.not.be.null;
@@ -187,10 +182,7 @@ describe("Map of Person to Brem Person", () => {
     });
 
     it("map the person to a bremPerson field for IMDB_ID", (done)=> {
-        personObservable
-            .map((person: Person) => {
-                return PersonObjectMapper.map(person);
-            })
+        bremPersonObservable
             .subscribe((bremPerson: BremPerson) => {
                 expect(bremPerson).to.not.be.undefined;
                 expect(bremPerson).to.not.be.null;
@@ -209,10 +201,7 @@ describe("Map of Person to Brem Person", () => {
 
 
     it("map the person to a bremPerson field for BIRTH_DAY", (done)=> {
-        personObservable
-            .map((person: Person) => {
-                return PersonObjectMapper.map(person);
-            })
+        bremPersonObservable
             .subscribe((bremPerson: BremPerson) => {
                 expect(bremPerson).to.not.be.undefined;
                 expect(bremPerson).to.not.be.null;
@@ -221,17 +210,14 @@ describe("Map of Person to Brem Person", () => {
                 expect(bremPerson.birthday).to.be.equal("1982-04-09");
                 done();
             }, (err) => {
-
+                throw err;
             }, () => {
                 //completed
             });
     });
 
     it("map the person to a bremPerson field for PROFILE_PATH", (done)=> {
-        personObservable
-            .map((person: Person) => {
-                return PersonObjectMapper.map(person);
-            })
+        bremPersonObservable
             .subscribe((bremPerson: BremPerson) => {
                 expect(bremPerson).to.not.be.undefined;
                 expect(bremPerson).to.not.be.null;
@@ -247,10 +233,7 @@ describe("Map of Person to Brem Person", () => {
     });
 
     it("map the person to a bremPerson field for POPULARITY", (done)=> {
-        personObservable
-            .map((person: Person) => {
-                return PersonObjectMapper.map(person);
-            })
+        bremPersonObservable
             .subscribe((bremPerson: BremPerson) => {
                 expect(bremPerson).to.not.be.undefined;
                 expect(bremPerson).to.not.be.null;
@@ -266,16 +249,85 @@ describe("Map of Person to Brem Person", () => {
     });
 
     it("map the person to a bremPerson field for BIOGRAPHY", (done)=> {
-        personObservable
-            .map((person: Person) => {
-                return PersonObjectMapper.map(person);
-            })
+        bremPersonObservable
             .subscribe((bremPerson: BremPerson) => {
                 expect(bremPerson).to.not.be.undefined;
                 expect(bremPerson).to.not.be.null;
                 expect(bremPerson.biography).to.not.be.undefined;
                 expect(bremPerson.biography).to.not.be.null;
                 expect(bremPerson.biography).to.be.contains("Jonathan Adam Saunders \"Jay\" Baruchel");
+                done();
+            }, (err) => {
+
+            }, () => {
+                //completed
+            });
+    });
+
+    it("map the person to a bremPerson field for Credits", (done)=> {
+        bremPersonObservable
+            .subscribe((bremPerson: BremPerson) => {
+                expect(bremPerson).to.not.be.undefined;
+                expect(bremPerson).to.not.be.null;
+                expect(bremPerson.credits).to.not.be.undefined;
+                expect(bremPerson.credits).to.not.be.null;
+                expect(bremPerson.credits.cast.length).to.be.greaterThan(0);
+                expect(bremPerson.credits.cast.length).to.be.equal(45);
+                expect(bremPerson.credits.crew.length).to.be.greaterThan(0);
+                expect(bremPerson.credits.crew.length).to.be.equal(5);
+                done();
+            }, (err) => {
+
+            }, () => {
+                //completed
+            });
+    });
+
+
+    it("map the person to a bremPerson field for One Cast", (done)=> {
+        bremPersonObservable
+            .subscribe((bremPerson: BremPerson) => {
+                expect(bremPerson).to.not.be.undefined;
+                expect(bremPerson).to.not.be.null;
+                expect(bremPerson.credits).to.not.be.undefined;
+                expect(bremPerson.credits).to.not.be.null;
+                expect(bremPerson.credits.cast.length).to.be.greaterThan(0);
+                expect(bremPerson.credits.crew.length).to.be.greaterThan(0);
+
+                let bremCastItem = _.find(bremPerson.credits.cast,
+                    (bremCast: BremCast<BremVideo>) =>bremCast.character == "Danger Barch");
+
+                expect(bremCastItem).to.not.be.undefined;
+                expect(bremCastItem).to.not.be.null;
+                expect(bremCastItem.tmdbCreditId).to.be.equal("52fe4213c3a36847f8002019");
+                expect(bremCastItem.item.tmdbId).to.be.equal(70);
+                done();
+            }, (err) => {
+
+            }, () => {
+                //completed
+            });
+    });
+
+    it("map the person to a bremPerson field for One crew", (done)=> {
+        bremPersonObservable
+            .subscribe((bremPerson: BremPerson) => {
+                expect(bremPerson).to.not.be.undefined;
+                expect(bremPerson).to.not.be.null;
+                expect(bremPerson.credits).to.not.be.undefined;
+                expect(bremPerson.credits).to.not.be.null;
+                expect(bremPerson.credits.cast.length).to.be.greaterThan(0);
+                expect(bremPerson.credits.crew.length).to.be.greaterThan(0);
+
+                let bremCrewItem = _.find(bremPerson.credits.crew,
+                    (bremCrew: BremCrew<BremVideo>) =>bremCrew.tmdbCreditId == "52fe48c8c3a368484e10abc3");
+
+                expect(bremCrewItem).to.not.be.undefined;
+                expect(bremCrewItem).to.not.be.null;
+                expect(bremCrewItem.tmdbCreditId).to.be.equal("52fe48c8c3a368484e10abc3");
+                expect(bremCrewItem.item.tmdbId).to.be.equal(74387);
+                expect(bremCrewItem.job).to.be.equal("Screenplay");
+                expect(bremCrewItem.department).to.be.equal("Writing");
                 done();
             }, (err) => {
 
