@@ -1,5 +1,5 @@
-export class BremCast<T>{
-    item: T;
+import {BremRole} from "./role.brem";
+export class BremCast<T> extends BremRole<T>{
     character: string;
     mediaType: string;
     order: number;

@@ -38,7 +38,3 @@ export class Video {
     alternative_titles: AlternativeTitles;
     credits: Credit;
 }
-
-export function print(video: Video) : void {
-    console.log(video.title + video.popularity);
-}

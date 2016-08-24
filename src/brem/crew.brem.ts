@@ -1,17 +1,7 @@
 
-export class BremCrew<T>{
-   /* tmdbId : number;
-    tmdbCreditId: string;
-    name: string;
-    department: string;
-    profilePath: string;
-    job: string;*/
-    item: T;
+import {BremRole} from "./role.brem";
+export class BremCrew<T> extends BremRole<T>{
     job: string;
     department: string;
     tmdbId: string;
-    mediaType: string;
-    tmdbCreditId: string;
-
-    //intentionally no constructor. use default constructor
 }

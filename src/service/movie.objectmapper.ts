@@ -53,7 +53,9 @@ export class ObjectMapper {
         mappedVideo.homepage = video.homepage;
         mappedVideo.runtime = video.runtime;
         mappedVideo.revenue = video.revenue;
-        mappedVideo.releaseDate = new Date(video.release_date);
+        if (video.release_date) {
+            mappedVideo.releaseDate = new Date(video.release_date);
+        }
         mappedVideo.status = video.status;
         mappedVideo.tagLine = video.tagline;
         mappedVideo.video = video.video;
@@ -65,7 +67,7 @@ export class ObjectMapper {
         mappedVideo.releases = this.mapReleases(video.releases);
         mappedVideo.keywords = this.mapKeywords(video.keywords);
 
-      mappedVideo.credits = this.mapCredits(video.credits);
+        mappedVideo.credits = this.mapCredits(video.credits);
 
         //map all the images into a single array
         let images: Array<BremImage> = this.mapImages(video.images.backdrops, 'isBackDrop');
@@ -75,7 +77,7 @@ export class ObjectMapper {
     }
 
 
-    static mapCredits(credits: Credit) : BremCredit<BremPerson>{
+    static mapCredits(credits: Credit): BremCredit<BremPerson> {
         let bremCredit = new BremCredit<BremPerson>();
         bremCredit.cast = this.mapCast(credits.cast);
         bremCredit.crew = this.mapCrew(credits.crew);
@@ -83,7 +85,7 @@ export class ObjectMapper {
     }
 
     static mapCast(cast: Array<Cast>): Array<BremCast<BremPerson>> {
-        return transform(cast, (results : Array<BremCast<BremPerson>>, castItem: Cast) => {
+        return transform(cast, (results: Array<BremCast<BremPerson>>, castItem: Cast) => {
             let bremCast = new BremCast<BremPerson>();
             bremCast.mediaType = "movie";
             bremCast.character = castItem.character;
@@ -103,7 +105,7 @@ export class ObjectMapper {
     }
 
     static mapCrew(crew: Array<Crew>): Array<BremCrew<BremPerson>> {
-        return transform(crew, (results : Array<BremCrew<BremPerson>>, crewItem: Crew) => {
+        return transform(crew, (results: Array<BremCrew<BremPerson>>, crewItem: Crew) => {
 
             let bremCrew = new BremCrew<BremPerson>();
             bremCrew.mediaType = "movie";
@@ -123,6 +125,7 @@ export class ObjectMapper {
 
         }, []);
     }
+
     static mapKeywords(keywords: keywords): Array<BremKeyword> {
         let keywordsArr = keywords.keywords;
 

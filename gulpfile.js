@@ -1,9 +1,11 @@
-var gulp = require("gulp");
-var ts = require("gulp-typescript");
-var tsProject = ts.createProject("tsconfig.json");
-var mocha = require('gulp-mocha');
+const gulp = require("gulp");
+const ts = require("gulp-typescript");
+const tsProject = ts.createProject("tsconfig.json");
+const mocha = require('gulp-mocha');
 const del = require('del');
 const runSequence = require('run-sequence');
+const gutil = require('gulp-util');
+
 
 const BUILD_DIRECTORY = './dist';
 
@@ -44,18 +46,33 @@ gulp.task('clean-node-modules', function () {
     })
 });
 
-/*gulp.task('clean-build', function(cb) {
- runSequence('build-clean',
- ['build-scripts', 'build-styles'],
- 'build-html',
- callback);
- });*/
+gulp.task('copy-prod', function () {
+    gulp
+        .src('dist/src/**/*.js')
+        .pipe(gulp.dest('dist/prod'));
+
+    gulp.src('package.json')
+        .pipe(gulp.dest('dist/prod'));
+});
 
 gulp.task('clean-build', function () {
     runSequence('clean-dist',
         ['build'],
         function () {
-            console.log('done cleaning and building');
+            gutil.log('done cleaning and building');
         });
+});
+
+// This will run in this order:
+// * clean-dist
+// * build
+// * copy-prod
+// * Finally call the callback function
+gulp.task('build-prod', function () {
+    //run all these in sequence
+    runSequence('clean-dist', 'build', 'copy-prod', function () {
+    gutil.log("Done building and copying files");
+
+    });
 });
 gulp.task('default', ['build', 'test']);

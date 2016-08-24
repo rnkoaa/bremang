@@ -19,7 +19,10 @@
     "build": "npm run clean && npm run lint && echo Using TypeScript && tsc --version && tsc --pretty",
     "test": "npm run build && mocha --compilers ts:ts-node/register --recursive test/**/*-spec.ts",
     "watch": "npm run build -- --watch",
-    "watch:test": "npm run test -- --watch"
+    "watch:test": "npm run test -- --watch",
+    "build:prod": "gulp build-prod",
+    // install npm modules for production
+    "postbuild:prod": "cd dist/prod && npm install --production"
   },
   "dependencies": {
     "@reactivex/rxjs": "^5.0.0-beta.11",
@@ -39,6 +42,8 @@
     "gulp": "^3.9.1",
     "gulp-mocha": "^3.0.1",
     "gulp-typescript": "^2.13.6",
+    "gulp-util": "^3.0.7",
+    "gutil": "^1.6.4",
     "mocha": "^3.0.2",
     "rimraf": "^2.5.4",
     "run-sequence": "^1.2.2",

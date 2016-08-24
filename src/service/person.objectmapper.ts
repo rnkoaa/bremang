@@ -67,15 +67,18 @@ export class PersonObjectMapper {
         }, []);
     };
 
-    static mapVideo(item: any) : BremVideo {
+    static mapVideo(item: any): BremVideo {
 
         let bremVideo = new BremVideo();
-        bremVideo.releaseDate = new Date(item.release_date);
+        if (item.release_date && (item.release_date != '')) {
+            bremVideo.releaseDate = new Date(item.release_date);
+        }
         bremVideo.tmdbId = item.id;
         bremVideo.posterPath = item.poster_path;
         bremVideo.adult = item.adult;
 
         let title = new BremTitle(item.title, "", "", false);
+        title.isMain = true;
         bremVideo.title = title;
 
         bremVideo.titles.push(title);
